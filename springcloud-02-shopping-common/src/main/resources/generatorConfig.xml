@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<!-- 设置数据库驱动的jar的位置(需要修改为自己jar的位置) -->
+	<classPathEntry
+		location="D:/maven/mysql/mysql-connector-java/5.1.47/mysql-connector-java-5.1.47.jar" />
+
+	<!-- targetRuntime 1,mybatis3:默认值，会生成大量对表操作的方法 2，mybatis3simple:只会生成对标基础操作的方法 -->
+	<context id="mysql" targetRuntime="MyBatis3Simple">
+
+		<!-- 关闭自动生成的注释 -->
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<!-- 设置数据库的连接信息 -->
+		<!-- 如果mybatis插件只能生成insert()与selectall()两个方法，说明mysql版本太高，如果此时不能降低mysql的版本，需要在url中添加nullcatalogmeanscurrent=true -->
+		<jdbcConnection
+			connectionURL="jdbc:mysql://localhost:3306/zhangli_shizhan"
+			driverClass="com.mysql.jdbc.Driver" password="123456" userId="root" />
+
+		<!-- 设置实体类所在的位置 -->
+		<javaModelGenerator
+			targetPackage="com.springcloud.entity"
+			targetProject="springcloud-02-shopping-common\src\main\java" />
+
+		<!-- 设置实体类對應的映射文件的位置 -->
+		<sqlMapGenerator targetPackage="mapper"
+			targetProject="springcloud-02-shopping-orders-provider\src\main\resources" />
+
+		<!-- 設置 映射文件對應 的接口位置 -->
+		<javaClientGenerator
+			targetPackage="com.springcloud.dao"
+			targetProject="springcloud-02-shopping-orders-provider\src\main\java"
+			type="XMLMAPPER" />
+
+		<table schema="test" tableName="orders">
+			<!-- 是否使用表中的列名生成实体类成员变量的名字 -->
+			<property name="userActualColumnNames" value="false" />
+		</table>
+		<table schema="test" tableName="order_details">
+			<!-- 是否使用表中的列名生成实体类成员变量的名字 -->
+			<property name="userActualColumnNames" value="false" />
+		</table>
+
+
+	</context>
+</generatorConfiguration>
